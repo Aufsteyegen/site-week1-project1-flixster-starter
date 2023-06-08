@@ -6,29 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flixster Site</title>
     <link href="./style.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/72081590a1.js" crossorigin="anonymous"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">  
 </head>
 <body>
     <section id="top">
         <div id="navbar">
-            <div>Flixter 🍿</div>
+            <div>F L I X T E R 🍿</div>
         </div>
     </section>
-    <section id="search">
+    <section class="search">
         <div>
-            <p>Welcome.</p>
-            <p>View the hottest movies from The Movie Database API.</p>
+            <p id="search-title">View the hottest movies from The Movie Database API.</p>
+        </div>
+        <div>
+            <form id="search-form">
+                <div class="wrapper">
+                    <input id="search-input" title="Search for movies" type="text" placeholder="Search movies by original, translated, and alternative titles.">
+                    <button id="search-button" type="submit">
+                        <i title="Search button" class="icon fa-solid fa-magnifying-glass fa-xl"></i>
+                    </button>
+                </div>
+            </form>
         </div>
     </section>
     <section id="main-content">
-        <div class="movies-grid">
-
-        </div>
+        <div id="currently-playing-underline">━━━━━━━━━</div>
+        <div><h4 id="currently-playing">Currently playing titles</h4></div>
+        <div class="movies-grid"></div>
         <div id="footer">
             <button id="extend-page" role="button">
-                <span class="extend-page-label">Load move movies</span>
+                <span class="extend-page-label">Load more movies</span>
             </button>
         </div>
+        <div class="query-grid"></div>
+        
     </section>
+    
 
     <script src="script.js"></script>    
 </body>
