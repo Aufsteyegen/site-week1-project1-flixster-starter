@@ -15,34 +15,43 @@
 <body>
     <section id="top">
         <div id="navbar">
-            <div>F L I X T E R 🍿</div>
+            <a href="index.html" id="homebutton"><div>F L I X T E R 🍿</div></a>
         </div>
     </section>
     <section class="search">
         <div>
-            <p id="search-title">View the hottest movies from The Movie Database API.</p>
+            <p id="search-title">Search thousands of movie titles in seconds.</p>
         </div>
         <div>
             <form id="search-form">
                 <div class="wrapper">
-                    <input id="search-input" title="Search for movies" type="text" placeholder="Search movies by original, translated, and alternative titles.">
+                    <input id="search-input" title="Search for movies" type="text" placeholder="Original, translated, and alternative titles." autofocus>
                     <button id="search-button" type="submit">
-                        <i title="Search button" class="icon fa-solid fa-magnifying-glass fa-xl"></i>
+                        <i title="Search button" class="icon fa-solid fa-magnifying-glass fa-2xl"></i>
                     </button>
                 </div>
             </form>
         </div>
     </section>
     <section id="main-content">
+        <div class="below-search-wrapper">
+            <div id="currently-playing"><h4>Now in theatres</h4></div>
+            <div class="modal-close-button" id="close-search-btn">
+                <button role="button">
+                    <div title="Return to currently playing movies">
+                        <i class="fa-solid fa-x fa-xl"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
         <div id="currently-playing-underline">━━━━━━━━━</div>
-        <div><h4 id="currently-playing">Currently playing titles</h4></div>
-        <div class="movies-grid"></div>
-        <div id="footer">
-            <button id="extend-page" role="button">
-                <span class="extend-page-label">Load more movies</span>
-            </button>
+        <div>
+            <div class="movies-grid"></div>
         </div>
         <div class="query-grid"></div>
+        <div class="movies-modal" onClick=closeModal()>
+            <div class="movies-modal-inner"></div>
+        </div>
         
     </section>
     
