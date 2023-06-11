@@ -1,9 +1,11 @@
-// Credit: The Movie Database API
+// ATTRIBUTION: The Movie Database API for movie data (movie posters, ratings, descriptions, runtime, release date, genres, languages)
+// ATTRIBUTION: JustWatch API for movie providers
 
 let curPage = 1, searchPage = 1
 let query = null, queryMovieData = null;
 let curMovieRequestData = null;
 let curMovieDetails = null;
+let curMovieProviders = null;
 let pageExtendButton = null, pageFooter = null;
 let movieID = null;
 
@@ -13,6 +15,7 @@ const queryGrid = document.querySelector('.query-grid')
 const searchButton = document.querySelector("#search-button")
 const searchInput = document.querySelector("#search-input")
 const searchForm = document.querySelector("#search-form")
+
 const queryCloseButton = document.querySelector("#close-search-btn")
 
 const options = {
@@ -37,6 +40,12 @@ function displayMovieDetailsModal () {
     const backdropURL = `https://image.tmdb.org/t/p/w500${curMovieDetails.backdrop_path}`
     const genreNames = curMovieDetails.genres.map(genre => genre.name).join(', ')
     const languages = curMovieDetails.spoken_languages.map(language => language.english_name).join(', ')
+    let providers
+    if (Object.keys(curMovieProviders.results).length == 0 || !("US" in curMovieProviders.results)) {
+        providers = "N/A"
+      } else {
+        providers = curMovieProviders.results.US.buy.map(provider => provider.provider_name).join(', ')
+      }
     document.querySelector('.movies-modal-inner').innerHTML += `
     <img class="movie-backdrop" title="${curMovieDetails.original_title} movie backdrop."src="${backdropURL}"/>
     <div class="modal-movie-title">
@@ -58,9 +67,18 @@ function displayMovieDetailsModal () {
     <div class="movie-genres"></div>
     `
     document.querySelector(".movie-genres").innerHTML += `
-    Genres: ${genreNames}<br>
-    Languages: ${languages}
+    Providers: ${providers}<br>
+    Genres: ${genreNames.length > 0 ? genreNames : "N/A"}<br>
+    Languages: ${languages.length > 0 ? languages : "N/A"}
     `
+}
+
+async function getMovieProviders (ID) {
+    const url = `https://api.themoviedb.org/3/movie/${ID}/watch/providers`
+    const response = await fetch(url, options);
+    const data = await response.json();
+    curMovieProviders = data;
+    displayMovieDetailsModal();
 }
 
 async function triggerDetailsAPI (ID) {
@@ -69,7 +87,7 @@ async function triggerDetailsAPI (ID) {
     const response = await fetch(url, options);
     const data = await response.json();
     curMovieDetails = data;
-    displayMovieDetailsModal();
+    getMovieProviders(ID);
 }
 
 function displayResults (data) {
