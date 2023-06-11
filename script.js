@@ -25,12 +25,16 @@ function closeModal() {
     document.querySelector('.movies-modal-inner').innerHTML = ``
     document.querySelector('.movies-modal').style.display = "none"
     document.querySelector('.movies-modal-inner').style.display = "none"
+    document.body.classList.remove("body-scroll-lock")
 }
 
 function displayMovieDetailsModal () {
     document.querySelector('.movies-modal').style.display = "flex"
+    document.body.classList.add("body-scroll-lock")
     document.querySelector('.movies-modal-inner').style.display = "block"
-    const backdropURL = `https://image.tmdb.org/t/p/w500${curMovieDetails.backdrop_path}`;
+    const backdropURL = `https://image.tmdb.org/t/p/w500${curMovieDetails.backdrop_path}`
+    const genreNames = curMovieDetails.genres.map(genre => genre.name).join(', ')
+    const languages = curMovieDetails.spoken_languages.map(language => language.english_name).join(', ')
     document.querySelector('.movies-modal-inner').innerHTML += `
     <img class="movie-backdrop" title="${curMovieDetails.original_title} movie backdrop."src="${backdropURL}"/>
     <div class="modal-movie-title">
@@ -48,7 +52,12 @@ function displayMovieDetailsModal () {
     <div class="movie-tagline">${curMovieDetails.tagline}</div>
     <div class="modal-movie-details">${curMovieDetails.overview}</div>
     <br>
-    <div title="Runtime: ${curMovieDetails.runtime} minutes | Release date: ${curMovieDetails.release_date}" class="modal-movie-details">Runtime: ${curMovieDetails.runtime} minutes | Release date: ${curMovieDetails.release_date}</div>
+    <div title="Runtime: ${curMovieDetails.runtime} minutes | Release date: ${curMovieDetails.release_date}" class="modal-movie-details">Runtime: ${curMovieDetails.runtime} minutes <br> Release date: ${curMovieDetails.release_date}</div>
+    <div class="movie-genres"></div>
+    `
+    document.querySelector(".movie-genres").innerHTML += `
+    Genres: ${genreNames}<br>
+    Languages: ${languages}
     `
 }
 
@@ -118,6 +127,7 @@ function closeQueryData() {
     movieGrid.style.display = "flex"
     movieGrid.innerHTML = ``
     searchPage = 1
+    curPage = 1
     getCurrentMovies()
     document.querySelector('#currently-playing').textContent = "Now in theatres"
     }

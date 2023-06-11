@@ -75,6 +75,10 @@ img:hover {
     box-shadow: 0px 0px 10px rgb(255, 255, 255);
 }
 
+.body-scroll-lock {
+    overflow: hidden;
+  }
+
 .movies-modal {
     display: none;
     align-items: center;
@@ -263,6 +267,7 @@ h4 {
 }
 
 .modal-close-button {
+    cursor: pointer;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -285,6 +290,10 @@ h4 {
     font-size: 20px;
     font-weight: bold;
     margin-left: 15px;
+}
+
+.movie-genres {
+    padding-left: 15px;
 }
 
 #homebutton {
