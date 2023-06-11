@@ -1,3 +1,5 @@
+// Credit: The Movie Database API
+
 let curPage = 1, searchPage = 1
 let query = null, queryMovieData = null;
 let curMovieRequestData = null;
